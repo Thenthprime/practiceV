@@ -11,13 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 public class AllEventsFragment extends Fragment {
 
     RecyclerView mRecyclerView;
-    ArrayList<Event> eventsList = new ArrayList<>();
+    public ArrayList<Event> eventsList = new ArrayList<>();
     RecyclerViewAdapter adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +33,7 @@ public class AllEventsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new RecyclerViewAdapter(eventsList);
         mRecyclerView.setAdapter(adapter);
+
         return view;
     }
 }

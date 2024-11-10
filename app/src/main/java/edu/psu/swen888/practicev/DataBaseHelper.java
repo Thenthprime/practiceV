@@ -8,6 +8,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Address;
+
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + EVENT_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_EVENT_DATE + " TEXT, " + COLUMN_EVENT_LOCATION + " INT)";
+        String createTableStatement = "CREATE TABLE " + EVENT_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_EVENT_DATE + " TEXT, " + COLUMN_EVENT_LOCATION + " ADDRESS)";
         db.execSQL(createTableStatement);
     }
 
@@ -37,7 +39,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_EVENT_DATE, event.getName());
-        cv.put(COLUMN_EVENT_LOCATION, event.getAddress());
+        cv.put(COLUMN_EVENT_LOCATION, event.getAddress().toString());
 
         long insert = db.insert(EVENT_TABLE, null , cv);
         if(insert == -1){
@@ -62,6 +64,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 int eventID = cursor.getInt(0);
                 String eventName = cursor.getString(1);
                 String eventAddress = cursor.getString(2);
+
 
                 Event newEvent = new Event(eventID, eventName, eventAddress);
                 returnList.add(newEvent);

@@ -1,5 +1,7 @@
 package edu.psu.swen888.practicev;
 
+import android.location.Address;
+
 import java.io.Serializable;
 
 public class Event implements Serializable {
