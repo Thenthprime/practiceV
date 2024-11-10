@@ -1,9 +1,7 @@
 package edu.psu.swen888.practicev;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllEventsFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_soccer);
+            navigationView.setCheckedItem(R.id.nav_all_events);
         }
     }
 
@@ -47,15 +45,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.nav_soccer:
+            case R.id.nav_all_events:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllEventsFragment()).commit();
                 break;
-            case R.id.nav_standings:
+            case R.id.nav_maps_view:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapsFragment()).commit();
                 break;
-//            case R.id.nav_my_account:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TopTeamsFragment()).commit();
-//                break;
+            case R.id.nav_add_event:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddEventFragment()).commit();
+                break;
         }
         return true;
     }

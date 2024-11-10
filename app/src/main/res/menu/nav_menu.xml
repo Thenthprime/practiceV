@@ -8,17 +8,17 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_soccer"
+            android:id="@+id/nav_all_events"
             android:icon = "@drawable/ic_launcher_foreground"
             android:title="All Events"/>
         <item
-            android:id="@+id/nav_standings"
+            android:id="@+id/nav_maps_view"
             android:icon = "@drawable/ic_launcher_foreground"
             android:title="Maps View"/>
-<!--        <item-->
-<!--            android:id="@+id/nav_my_account"-->
-<!--            android:icon = "@drawable/ic_launcher_foreground"-->
-<!--            android:title="Current Rankings"/>-->
+        <item
+            android:id="@+id/nav_add_event"
+            android:icon = "@drawable/ic_launcher_foreground"
+            android:title="Add Event"/>
 
     </group>
 
