@@ -1,15 +1,10 @@
 package edu.psu.swen888.practicev;
 
-import static java.security.AccessController.getContext;
-import static java.sql.Types.INTEGER;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.location.Address;
-
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;

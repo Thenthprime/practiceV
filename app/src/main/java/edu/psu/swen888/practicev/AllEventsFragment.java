@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class AllEventsFragment extends Fragment {
 
     RecyclerView mRecyclerView;
-    public ArrayList<Event> eventsList = new ArrayList<>();
+    public static ArrayList<Event> eventsList = new ArrayList<>();
     RecyclerViewAdapter adapter;
 
 
@@ -35,5 +35,9 @@ public class AllEventsFragment extends Fragment {
         mRecyclerView.setAdapter(adapter);
 
         return view;
+    }
+
+    public static ArrayList<Event> getEventsList(){
+        return eventsList;
     }
 }
