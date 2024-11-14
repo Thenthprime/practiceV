@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapsFragment extends Fragment{
+    private ArrayList<Event> eventsList = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         //Initialize view
@@ -47,23 +49,34 @@ public class MapsFragment extends Fragment{
         supportMapFragment.getMapAsync(new OnMapReadyCallback(){
             public void onMapReady(GoogleMap googleMap) {
 
-                    //initialize the marker options
-                    MarkerOptions glendaleArizona = new MarkerOptions();
-                    //latitude and longitude marker
-                    LatLng March17and18 = new LatLng(33.528, -112.263);
-                    //set position of marker
-                    glendaleArizona.position(March17and18);
-                    //add marker on map
-                    googleMap.addMarker(glendaleArizona).setTitle("March 17 & 18");
-
-                    //initialize the marker options
-                    MarkerOptions paradiseNevada = new MarkerOptions();
-                    //latitude and longitude marker
-                    LatLng March24and25= new LatLng(36, -115);
-                    //set position of marker
-                    paradiseNevada.position(March24and25);
-                    //add marker on map
-                    googleMap.addMarker(paradiseNevada).setTitle("March 24 & 25");
+                //retrieve events from database
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(getContext());
+                eventsList = dataBaseHelper.getAllEvents();
+                //iterate throuhg each events to retrieve the address
+                    for(Event event : eventsList){
+                        String eventLocation = event.getAddress();
+                        //initialize a list of addresses
+                        List<Address> addressList = null;
+                        if(eventLocation != null || eventLocation.equals("")){
+                            //Initialize the geocoder
+                            Geocoder geocoder = new Geocoder(getContext());
+                            try {
+                                //this is to get only one result (if there are multiple cities with the same name)
+                                addressList = geocoder.getFromLocationName(eventLocation, 1);
+                            }
+                            catch (IOException e) {
+                                //exception handling
+                                e.printStackTrace();
+                            }
+                            //get the address
+                            Address address = addressList.get(0);
+                            //retrieve the latitude and longidue and add the marker to the map
+                            MarkerOptions markerOptions = new MarkerOptions();
+                            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                            markerOptions.position(latLng);
+                            googleMap.addMarker(markerOptions).setTitle(event.getName());
+                        }
+                    }
 
 //                //when map is loaded
 //                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -91,6 +104,8 @@ public class MapsFragment extends Fragment{
         return view;
     }
 }
+
+//I think everything below here can be trashed soon
 
 //public class MapsFragment extends Fragment {
 //
