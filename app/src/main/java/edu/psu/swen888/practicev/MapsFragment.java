@@ -52,7 +52,7 @@ public class MapsFragment extends Fragment{
                 //retrieve events from database
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(getContext());
                 eventsList = dataBaseHelper.getAllEvents();
-                //iterate throuhg each events to retrieve the address
+                //iterate through each event to retrieve the address
                     for(Event event : eventsList){
                         String eventLocation = event.getAddress();
                         //initialize a list of addresses
@@ -70,7 +70,7 @@ public class MapsFragment extends Fragment{
                             }
                             //get the address
                             Address address = addressList.get(0);
-                            //retrieve the latitude and longidue and add the marker to the map
+                            //retrieve the latitude and longitude and add the marker to the map
                             MarkerOptions markerOptions = new MarkerOptions();
                             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                             markerOptions.position(latLng);
