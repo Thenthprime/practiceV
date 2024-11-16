@@ -42,7 +42,7 @@ public class MapsFragment extends Fragment{
     private ArrayList<Event> eventsList = new ArrayList<>();
     private SearchView mSearchView;
     private FloatingActionButton mFloatingActionButton;
-    private TextView textViewOption1, textViewOption2, textViewOption3, textViewOption4;
+    private TextView textViewOption1, textViewOption2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         //Initialize view
@@ -136,6 +136,25 @@ public class MapsFragment extends Fragment{
                 textViewOption1 = getView().findViewById(R.id.option_clear_map);
                 textViewOption2 = getView().findViewById(R.id.option_add_marker);
 
+                textViewOption1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        googleMap.clear();
+                    }
+                });
+                textViewOption2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String locationName = "Penn State - Great Valley";
+                        /** Represent location we need to use LatLng */
+                        LatLng pennStateGV = new LatLng(40.0429, -75.5133);
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.position(pennStateGV);
+                        //animateing to zoom the marker
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pennStateGV, 10));
+                        googleMap.addMarker(markerOptions).setTitle("Penn State Great Vally");
+                    }
+                });
             }
         });
         //Return view
