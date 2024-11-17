@@ -5,15 +5,20 @@ import android.location.Address;
 import java.io.Serializable;
 
 public class Event implements Serializable {
+    //Event features
     private int eventID;
     private String name;
     private String address;
+
+    //Event constructor
 
     public Event(int eventID, String name, String address) {
         this.eventID = eventID;
         this.name = name;
         this.address = address;
     }
+
+    //Event getters and setters
 
     public int getEventID() {
         return eventID;

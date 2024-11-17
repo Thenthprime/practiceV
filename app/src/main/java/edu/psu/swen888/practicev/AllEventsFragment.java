@@ -27,17 +27,16 @@ public class AllEventsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_events, container, false);
+        // initiate the recycler view object
         mRecyclerView = view.findViewById(R.id.recyclerViewAllEvents);
+        //use the database helper class to populate the eventsList
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getContext());
         eventsList = dataBaseHelper.getAllEvents();
+        //send eventsList through the recyclerview adapter
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new RecyclerViewAdapter(eventsList);
         mRecyclerView.setAdapter(adapter);
 
         return view;
-    }
-
-    public static ArrayList<Event> getEventsList(){
-        return eventsList;
     }
 }

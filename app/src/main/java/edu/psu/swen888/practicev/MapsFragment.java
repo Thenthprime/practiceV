@@ -1,26 +1,16 @@
 package edu.psu.swen888.practicev;
 
-import static android.view.View.VISIBLE;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,10 +18,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -43,6 +29,7 @@ public class MapsFragment extends Fragment{
     private SearchView mSearchView;
     private FloatingActionButton mFloatingActionButton;
     private TextView textViewOption1, textViewOption2;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         //Initialize view
@@ -114,7 +101,7 @@ public class MapsFragment extends Fragment{
                             MarkerOptions markerOptions = new MarkerOptions();
                             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                             markerOptions.position(latLng);
-                            //animateing to zoom the marker
+                            //animating to zoom the marker
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                             googleMap.addMarker(markerOptions).setTitle(query);
                         }
@@ -146,13 +133,13 @@ public class MapsFragment extends Fragment{
                     @Override
                     public void onClick(View v) {
                         String locationName = "Penn State - Great Valley";
-                        /** Represent location we need to use LatLng */
+                        //Manual addition of PSU
                         LatLng pennStateGV = new LatLng(40.0429, -75.5133);
                         MarkerOptions markerOptions = new MarkerOptions();
                         markerOptions.position(pennStateGV);
-                        //animateing to zoom the marker
+                        //animating to zoom the marker
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pennStateGV, 10));
-                        googleMap.addMarker(markerOptions).setTitle("Penn State Great Vally");
+                        googleMap.addMarker(markerOptions).setTitle(locationName);
                     }
                 });
             }
@@ -160,17 +147,15 @@ public class MapsFragment extends Fragment{
         //Return view
         return view;
     }
-
+    //method for floating action bar menu
     private void showOptionsMenu() {
         ConstraintLayout optionsMenu = getView().findViewById(R.id.options_menu);
         if (optionsMenu.getVisibility() == View.VISIBLE) {
-            /** Hide the options menu */
+            //Hide the options menu
             optionsMenu.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "Set visibility GONE", Toast.LENGTH_SHORT).show();
         } else {
-            /** Show the options menu */
+            //Show the options menu
             optionsMenu.setVisibility(View.VISIBLE);
-            Toast.makeText(getContext(), "Set visibility VISIBLE", Toast.LENGTH_SHORT).show();
         }
     }
 }
